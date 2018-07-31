@@ -1,5 +1,4 @@
-#ifndef RAY
-#define RAY
+#pragma once
 
 #include "vec3.hpp"
 
@@ -20,5 +19,3 @@ class ray {
     vec3 A;
     vec3 B;
 };
-
-#endif // RAY
