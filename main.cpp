@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <string>
 #include "vec3.hpp"
 #include "ray.hpp"
 #include "sphere.hpp"
@@ -11,7 +12,7 @@
 vec3 color(const ray &r, hitable *world, int depth)
 {
   hit_record rec;
-  if (world->hit(r, 0.001, MAXFLOAT, rec))
+  if (world->hit(r, 0.001, FLT_MAX, rec))
   {
     ray scattered;
     vec3 attenuation;
@@ -38,9 +39,9 @@ int main()
   int ny = 200;
   int ns = 100;
 
-  std::ofstream file("out.png");
+  std::ofstream file("out.ppm", std::ios::binary | std::ios::out);
   file << "P3\n"
-       << nx << " " << ny << "\n255\n";
+    << nx << " " << ny << "\n255\n";
 
   hitable *list[4];
   list[0] = new sphere(vec3(0, 0, -1), 0.5, new lambertian(vec3(0.8, 0.3, 0.3)));
